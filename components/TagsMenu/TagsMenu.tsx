@@ -7,7 +7,7 @@ import { useState } from 'react';
 const TagsMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
-  const tags = ['Todo', 'Work', 'Personal', 'Shopping', 'Meeting'];
+  const tags = ['Work', 'Personal', 'Shopping', 'Meeting', 'Todo'];
 
   return (
     <div className={css.menuContainer}>

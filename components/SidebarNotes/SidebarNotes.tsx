@@ -1,9 +1,8 @@
 import css from './SidebarNotes.module.css';
 import Link from 'next/link';
 
-const tags = ['Todo', 'Work', 'Personal', 'Shopping', 'Meeting'];
-
 const SidebarNotes = () => {
+  const tags = ['Work', 'Personal', 'Shopping', 'Meeting', 'Todo'];
   return (
     <ul className={css.menuList}>
       <li className={css.menuItem}>
