@@ -1,10 +1,8 @@
 import css from './Header.module.css';
 import Link from 'next/link';
 import TagsMenu from '../TagsMenu/TagsMenu';
-import { fetchNotes } from '@/lib/api';
 
-const Header = async () => {
-  const { notes } = await fetchNotes({});
+const Header = () => {
   return (
     <header className={css.header}>
       <Link href="/" aria-label="Home">
@@ -16,7 +14,7 @@ const Header = async () => {
             <Link href="/">Home</Link>
           </li>
           <li>
-            <TagsMenu notes={notes} />
+            <TagsMenu />
           </li>
         </ul>
       </nav>

@@ -3,16 +3,11 @@
 import Link from 'next/link';
 import css from './TagsMenu.module.css';
 import { useState } from 'react';
-import { Note } from '@/types/note';
 
-interface TagsMenuProps {
-  notes: Note[];
-}
-
-const TagsMenu = ({ notes }: TagsMenuProps) => {
+const TagsMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
-  const tags = [...new Set(notes.flatMap((note) => note.tag))];
+  const tags = ['All', 'Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
 
   return (
     <div className={css.menuContainer}>
@@ -21,15 +16,6 @@ const TagsMenu = ({ notes }: TagsMenuProps) => {
       </button>
       {isOpen && (
         <ul className={css.menuList}>
-          <li className={css.menuItem}>
-            <Link
-              href="/notes/filter/All"
-              className={css.menuLink}
-              onClick={toggle}
-            >
-              All notes
-            </Link>
-          </li>
           {tags.map((tag) => (
             <li key={tag} className={css.menuItem}>
               <Link
