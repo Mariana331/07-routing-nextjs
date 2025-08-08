@@ -5,12 +5,9 @@ import css from './NotePreview.module.css';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import { fetchNoteById } from '@/lib/api';
+import Modal from '@/components/Modal/Modal';
 
-interface Props {
-  children?: React.ReactNode;
-}
-
-const NoteDetailsClient = ({ children }: Props) => {
+const NotePreviewClient = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const handleBack = () => {
     router.back();
@@ -32,20 +29,22 @@ const NoteDetailsClient = ({ children }: Props) => {
   if (error || !note) return <p>Something went wrong.</p>;
 
   return (
-    <div className={css.container}>
-      {children}
-      <button className={css.backBtn} onClick={handleBack}>
-        CLOSE
-      </button>
-      <div className={css.item}>
-        <div className={css.header}>
-          <h2>{note.title}</h2>
+    <Modal onClose={handleBack}>
+      <div className={css.container}>
+        <button className={css.backBtn} onClick={handleBack}>
+          {children}
+        </button>
+        <div className={css.item}>
+          <div className={css.header}>
+            <span className={css.tag}>{note.tag}</span>
+            <h2>{note.title}</h2>
+          </div>
+          <p className={css.content}>{note.content}</p>
+          <p className={css.date}>{note.createdAt}</p>
         </div>
-        <p className={css.content}>{note.content}</p>
-        <p className={css.date}>{note.createdAt}</p>
       </div>
-    </div>
+    </Modal>
   );
 };
 
-export default NoteDetailsClient;
+export default NotePreviewClient;

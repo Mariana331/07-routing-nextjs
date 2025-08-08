@@ -1,12 +1,18 @@
 import css from './SidebarNotes.module.css';
 import Link from 'next/link';
+import { Note } from '@/types/note';
 
-const SidebarNotes = () => {
-  const tags = ['Work', 'Personal', 'Shopping', 'Meeting', 'Todo'];
+interface SidebarNotesProps {
+  notes: Note[];
+}
+
+const SidebarNotes = ({ notes }: SidebarNotesProps) => {
+  const tags = [...new Set(notes.flatMap((note) => note.tag))];
+
   return (
     <ul className={css.menuList}>
       <li className={css.menuItem}>
-        <Link href="/notes/filter/all" className={css.menuLink}>
+        <Link href="/notes/filter/All" className={css.menuLink}>
           All notes
         </Link>
       </li>

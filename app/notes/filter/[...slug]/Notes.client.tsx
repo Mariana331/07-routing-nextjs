@@ -15,16 +15,11 @@ import SearchBox from '@/components/SearchBox/SearchBox';
 import css from './notesPage.module.css';
 
 interface NotesProps {
-  notes: Note[];
-  totalPages: number;
-  initialTag: string | undefined;
+  initialData: { notes: Note[]; totalPages: number };
+  tag: string | undefined;
 }
 
-export default function NotesClient({
-  notes,
-  totalPages,
-  initialTag,
-}: NotesProps) {
+export default function NotesClient({ initialData, tag }: NotesProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [searchInput, setSearchInput] = useState('');
@@ -40,15 +35,15 @@ export default function NotesClient({
   };
 
   const { data, isSuccess } = useQuery({
-    queryKey: ['notes', searchQuery, currentPage, initialTag],
+    queryKey: ['notes', searchQuery, currentPage, tag],
     queryFn: () =>
       fetchNotes({
         page: currentPage,
         search: searchQuery.trim() || undefined,
-        tag: initialTag === 'all' ? undefined : initialTag,
+        tag: tag === 'All' ? undefined : tag,
       }),
     placeholderData: keepPreviousData,
-    initialData: { notes, totalPages },
+    initialData,
   });
 
   const totalPagesFromData = data?.totalPages ?? 0;

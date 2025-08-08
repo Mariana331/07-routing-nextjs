@@ -1,9 +1,12 @@
-import SidebarNotes from '@/components/SidebarNotes/SidebarNotes';
+import SidebarNotes from '@/app/notes/filter/@sidebar/SidebarNotes';
+import { fetchNotes } from '@/lib/api';
 
 const NotesSidebar = async () => {
+  const { notes } = await fetchNotes({});
+
   return (
     <div>
-      <SidebarNotes />
+      <SidebarNotes notes={notes} />
     </div>
   );
 };
