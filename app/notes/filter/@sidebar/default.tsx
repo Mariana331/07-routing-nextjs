@@ -1,10 +1,8 @@
-import { fetchNotes } from '@/lib/api';
 import css from './SidebarNotes.module.css';
 import Link from 'next/link';
 
-const SidebarNotes = async () => {
-  const { notes } = await fetchNotes({});
-  const tags = [...new Set(notes.flatMap((note) => note.tag))];
+const SidebarNotes = () => {
+  const tags = ['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
   return (
     <ul className={css.menuList}>
       <li className={css.menuItem}>
